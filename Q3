@@ -1,8 +1,13 @@
-public class SaqueEfetuado extends BaseEvent<String> {
-    public final double valor;
+public class PedidoCriadoEvent extends BaseEvent<String> {
 
-    public SaqueEfetuado(String id, double valor) {
+    public final String clienteId;
+    public final List<String> itens;
+    public final double valorTotal;
+
+    public PedidoCriadoEvent(String id, String clienteId, List<String> itens, double valorTotal) {
         super(id);
-        this.valor = valor;
+        this.clienteId = clienteId;
+        this.itens = itens;
+        this.valorTotal = valorTotal;
     }
 }
