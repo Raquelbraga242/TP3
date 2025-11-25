@@ -1,4 +1,3 @@
-
 @Aggregate
 public class Pedido {
 
