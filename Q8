@@ -1,0 +1,16 @@
+@Service
+public class PedidoQueryService {
+
+    private final EventStore eventStore;
+
+    public PedidoQueryService(EventStore eventStore) {
+        this.eventStore = eventStore;
+    }
+
+    public List<Object> listarEventos(String id) {
+        return eventStore.readEvents(id)
+                .asStream()
+                .map(e -> e.getPayload())
+                .collect(Collectors.toList());
+    }
+}
