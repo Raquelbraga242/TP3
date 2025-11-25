@@ -1,4 +1,3 @@
-
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoQueryController {
