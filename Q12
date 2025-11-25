@@ -1,0 +1,23 @@
+
+@RestController
+@RequestMapping("/pedidos")
+public class PedidoQueryController {
+
+    private final PedidoQueryService queryService;
+    private final PedidoRepository repository;
+
+    public PedidoQueryController(PedidoQueryService queryService, PedidoRepository repository) {
+        this.queryService = queryService;
+        this.repository = repository;
+    }
+
+    @GetMapping("/{id}/eventos")
+    public List<Object> eventos(@PathVariable String id) {
+        return queryService.listarEventos(id);
+    }
+
+    @GetMapping("/{id}")
+    public Pedido obter(@PathVariable String id) {
+        return repository.findById(id).orElse(null);
+    }
+}
