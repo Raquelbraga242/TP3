@@ -1,0 +1,3 @@
+public Optional<Pedido> obterPorId(String id) {
+    return repository.findById(id);
+}
