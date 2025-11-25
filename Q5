@@ -1,29 +1,14 @@
-
 @Service
-public class ContaCorrenteCommandServiceImpl implements ContaCorrenteCommandService {
+public class PedidoCommandService {
 
-    @Autowired
-    private final CommandGateway commandGateway;
+    private final CommandGateway gateway;
 
-    public ContaCorrenteCommandServiceImpl(CommandGateway commandGateway) {
-        this.commandGateway = commandGateway;
+    public PedidoCommandService(CommandGateway gateway) {
+        this.gateway = gateway;
     }
 
-    @Override
-    public CompletableFuture<String> abrirContaCorrente(ContaCorrente cc) {
-        return commandGateway.send(new CriarContaCommand(
-                UUID.randomUUID().toString(),
-                cc.getTitular(),
-                cc.getSaldo()));
-    }
-
-    @Override
-    public CompletableFuture<String> depositar(String id, double valor) {
-        return commandGateway.send(new DepositarCommand(id, valor));
-    }
-
-    @Override
-    public CompletableFuture<String> sacar(String id, double valor) {
-        return commandGateway.send(new SacarCommand(id, valor));
+    public CompletableFuture<String> criarPedido(String clienteId, List<String> itens, double valorTotal) {
+        String id = UUID.randomUUID().toString();
+        return gateway.send(new CriarPedidoCommand(id, clienteId, itens, valorTotal));
     }
 }
