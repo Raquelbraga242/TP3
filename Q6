@@ -1,0 +1,19 @@
+
+@Aggregate
+public class Pedido {
+
+    @AggregateIdentifier
+    private String id;
+    private String clienteId;
+    private List<String> itens;
+    private double valorTotal;
+    private String estado;
+
+    public Pedido() {}
+
+    @CommandHandler
+    public Pedido(CriarPedidoCommand cmd) {
+        AggregateLifecycle.apply(
+            new PedidoCriadoEvent(cmd.id, cmd.clienteId, cmd.itens, cmd.valorTotal)
+        );
+    }
