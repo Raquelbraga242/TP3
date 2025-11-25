@@ -1,0 +1,17 @@
+@RestController
+@RequestMapping("/pedidos")
+public class PedidoCommandController {
+
+    private final PedidoCommandService service;
+
+    public PedidoCommandController(PedidoCommandService service) {
+        this.service = service;
+    }
+
+    record CriarPedidoDTO(String clienteId, List<String> itens, double valorTotal) {}
+
+    @PostMapping
+    public CompletableFuture<String> criar(@RequestBody CriarPedidoDTO dto) {
+        return service.criarPedido(dto.clienteId(), dto.itens(), dto.valorTotal());
+    }
+}
