@@ -1,0 +1,8 @@
+@EventSourcingHandler
+    protected void on(PedidoCriadoEvent evt) {
+        this.id = evt.id;
+        this.clienteId = evt.clienteId;
+        this.itens = evt.itens;
+        this.valorTotal = evt.valorTotal;
+        this.estado = "CRIADO";
+    }
